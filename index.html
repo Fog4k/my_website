@@ -4,6 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Симуляция оплаты</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+            text-align: left;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="number"], input[type="tel"], input[type="text"] {
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #responseMessage {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #e74c3c;
+        }
+    </style>
     <script>
         function submitForm(event) {
             event.preventDefault();  // Отменяем стандартное отправление формы
@@ -15,7 +90,8 @@
 
             // Проверяем, что все поля заполнены
             if (!cardNumber || !amount || !phoneNumber) {
-                alert("Пожалуйста, заполните все поля!");
+                document.getElementById('responseMessage').innerHTML = "Пожалуйста, заполните все поля!";
+                document.getElementById('responseMessage').classList.add('error');
                 return;
             }
 
@@ -25,27 +101,30 @@
                 Тебя ждёт сюрприз! 🎉<br>
                 (Номер карты: ${cardNumber}, Сумма: ${amount}, Номер телефона: ${phoneNumber})
             `;
+            document.getElementById('responseMessage').classList.remove('error');
         }
     </script>
 </head>
 <body>
 
-    <h1>Симуляция оплаты</h1>
+    <div class="container">
+        <h1>Симуляция оплаты</h1>
 
-    <form onsubmit="submitForm(event)">
-        <label for="cardNumber">Номер карты:</label><br>
-        <input type="text" id="cardNumber" name="cardNumber" placeholder="Введите номер карты" required><br><br>
+        <form onsubmit="submitForm(event)">
+            <label for="cardNumber">Номер карты:</label>
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="Введите номер карты" required>
 
-        <label for="amount">Сумма:</label><br>
-        <input type="number" id="amount" name="amount" placeholder="Введите сумму" required><br><br>
+            <label for="amount">Сумма:</label>
+            <input type="number" id="amount" name="amount" placeholder="Введите сумму" required>
 
-        <label for="phoneNumber">Номер телефона:</label><br>
-        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Введите номер телефона" required><br><br>
+            <label for="phoneNumber">Номер телефона:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Введите номер телефона" required>
 
-        <button type="submit">Отправить</button>
-    </form>
+            <button type="submit">Отправить</button>
+        </form>
 
-    <div id="responseMessage" style="margin-top: 20px; font-size: 18px; color: green;"></div>
+        <div id="responseMessage"></div>
+    </div>
 
 </body>
 </html>
