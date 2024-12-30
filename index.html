@@ -1,62 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пополнение карты</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin: 50px auto;
-            padding: 20px;
-            max-width: 400px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        input, button {
-            margin: 10px 0;
-            padding: 10px;
-            width: 90%;
-            font-size: 16px;
-        }
-        .message {
-            color: red;
-            font-weight: bold;
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Пополнение карты</h1>
-        <p>Введите номер карты и сумму для пополнения.</p>
-        <input type="text" id="cardNumber" placeholder="Номер карты" maxlength="16">
-        <input type="number" id="amount" placeholder="Сумма (в суммах)">
-        <button onclick="process()">Пополнить</button>
-        <p class="message" id="message">Все деньги с вашей карты были списаны!</p>
-    </div>
+    <title>Симуляция оплаты</title>
     <script>
-        function process() {
-            const cardNumber = document.getElementById("cardNumber").value;
-            const amount = document.getElementById("amount").value;
-            
-            if (cardNumber === "" || amount === "") {
-                alert("Пожалуйста, заполните все поля.");
+        function submitForm(event) {
+            event.preventDefault();  // Отменяем стандартное отправление формы
+
+            // Получаем значения из формы
+            const cardNumber = document.getElementById('cardNumber').value;
+            const amount = document.getElementById('amount').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+
+            // Проверяем, что все поля заполнены
+            if (!cardNumber || !amount || !phoneNumber) {
+                alert("Пожалуйста, заполните все поля!");
                 return;
             }
-            
-            // Шуточное сообщение
-            const message = document.getElementById("message");
-            message.style.display = "block";
-            alert(`Пополнение на ${amount} сум успешно выполнено!`);
+
+            // Показываем сообщение после отправки данных
+            document.getElementById('responseMessage').innerHTML = `
+                Спасибо за данные!<br>
+                Тебя ждёт сюрприз! 🎉<br>
+                (Номер карты: ${cardNumber}, Сумма: ${amount}, Номер телефона: ${phoneNumber})
+            `;
         }
     </script>
+</head>
+<body>
+
+    <h1>Симуляция оплаты</h1>
+
+    <form onsubmit="submitForm(event)">
+        <label for="cardNumber">Номер карты:</label><br>
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="Введите номер карты" required><br><br>
+
+        <label for="amount">Сумма:</label><br>
+        <input type="number" id="amount" name="amount" placeholder="Введите сумму" required><br><br>
+
+        <label for="phoneNumber">Номер телефона:</label><br>
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Введите номер телефона" required><br><br>
+
+        <button type="submit">Отправить</button>
+    </form>
+
+    <div id="responseMessage" style="margin-top: 20px; font-size: 18px; color: green;"></div>
+
 </body>
 </html>
