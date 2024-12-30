@@ -3,75 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тазик гей?</title>
+    <title>Пополнение карты</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            text-align: center;
             margin: 0;
             padding: 0;
+            background-color: #f8f9fa;
         }
-
         .container {
-            text-align: center;
-            margin-top: 100px;
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        h1 {
-            color: #333;
-        }
-
-        .buttons {
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
             font-size: 16px;
-            margin: 0 10px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
         }
-
-        .result {
-            margin-top: 20px;
-        }
-
-        .share-button {
-            margin-top: 20px;
+        .message {
+            color: red;
+            font-weight: bold;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Тазик гей?</h1>
-        <div class="buttons">
-            <button id="yesButton">Да</button>
-            <button id="noButton">Нет гей</button>
-        </div>
-        <div class="result" id="result">
-            <!-- Здесь будет отображаться изображение -->
-        </div>
-        
+        <h1>Пополнение карты</h1>
+        <p>Введите номер карты и сумму для пополнения.</p>
+        <input type="text" id="cardNumber" placeholder="Номер карты" maxlength="16">
+        <input type="number" id="amount" placeholder="Сумма (в суммах)">
+        <button onclick="process()">Пополнить</button>
+        <p class="message" id="message">Все деньги с вашей карты были списаны!</p>
     </div>
     <script>
-        function showImage(imageUrl) {
-            var resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '<img src="' + imageUrl + '" alt="Изображение">';
+        function process() {
+            const cardNumber = document.getElementById("cardNumber").value;
+            const amount = document.getElementById("amount").value;
+            
+            if (cardNumber === "" || amount === "") {
+                alert("Пожалуйста, заполните все поля.");
+                return;
+            }
+            
+            // Шуточное сообщение
+            const message = document.getElementById("message");
+            message.style.display = "block";
+            alert(`Пополнение на ${amount} сум успешно выполнено!`);
         }
-
-        document.getElementById('yesButton').addEventListener('click', function() {
-            showImage('images/1.jpg');
-        });
-
-        document.getElementById('noButton').addEventListener('click', function() {
-            showImage('images/2.png');
-        });
-
-       
     </script>
 </body>
 </html>
